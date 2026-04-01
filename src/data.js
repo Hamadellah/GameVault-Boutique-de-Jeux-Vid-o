@@ -66,69 +66,57 @@ export const games = [
       "Explorez les Ã©toiles et dÃ©couvrez le plus grand mystÃ¨re de l'humanitÃ© dans ce RPG spatial.",
   },
   {
-  id: 7,
-  title: "Cyberpunk 2077",
-  price: 45.0,
-  category: "Action",
-  image: "https://cdn1.epicgames.com/cyberpunk2077/cover.jpg",
-  description: "Plongez dans un futur dystopique rempli de technologie et de chaos."
-},
-{
-  id: 8,
-  title: "The Legend of Zelda: Breath of the Wild",
-  price: 60.0,
-  category: "RPG",
-  image: "https://cdn.nintendo.com/zelda-botw-cover.jpg",
-  description: "Explorez Hyrule dans une aventure épique pleine de mystères et de liberté."
-},
-{
-  id: 9,
-  title: "Gran Turismo 7",
-  price: 50.0,
-  category: "Sport",
-  image: "https://cdn.playstation.com/granturismo7-cover.jpg",
-  description: "Vivez l’expérience ultime de course automobile avec des graphismes réalistes."
-},
-{
-  id: 10,
-  title: "Minecraft",
-  price: 30.0,
-  category: "RPG",
-  image: "https://cdn.minecraft.net/minecraft-cover.jpg",
-  description: "Construisez, explorez et survivez dans un monde infini de blocs."
-},
-{
-  id: 11,
-  title: "Fortnite",
-  price: 0.0,
-  category: "Action",
-  image: "https://cdn.epicgames.com/fortnite-cover.jpg",
-  description: "Affrontez vos adversaires dans le battle royale le plus populaire au monde."
-},
-{
-  id: 12,
-  title: "EA Sports FC 26",
-  price: 59.99,
-  category: "Sport",
-  image: "https://cdn.ea.com/fc26-cover.jpg",
-  description: "Le nouveau chapitre du football virtuel avec des modes réalistes et compétitifs."
-},
-{
-  id: 13,
-  title: "Assassin’s Creed Mirage",
-  price: 55.0,
-  category: "Action",
-  image: "https://cdn.ubisoft.com/ac-mirage-cover.jpg",
-  description: "Retour aux origines avec une aventure immersive dans Bagdad médiéval."
-},
-{
-  id: 14,
-  title: "Elden Ring",
-  price: 49.99,
-  category: "RPG",
-  image: "https://cdn.bandainamco.com/eldenring-cover.jpg",
-  description: "Un monde ouvert sombre et mystérieux créé par FromSoftware."
-},
+    id: 7,
+    title: "Cyberpunk 2077",
+    price: 45.0,
+    category: "Action",
+    image:
+      "https://www.domusweb.it/content/dam/domusweb/it/news/gallery/2020/12/21/night-city-cyberpunk-2077/gallery/Cyberpunk2077_Tell_me_what_you_need_RGB.png",
+    description:
+      "Plongez dans un futur dystopique rempli de technologie et de chaos.",
+  },
+  {
+    id: 8,
+    title: "The Legend of Zelda: Breath of the Wild",
+    price: 60.0,
+    category: "RPG",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy3xKwNi4alo_sLQn8ZaUkBig8U715I8dHSRbtcqB-HhxCOmPQJRZe_c7toreRr-OiQ4d4jtN96REVQw7BWVWhCdBMVUZ7x9aQVAlR3jF96A&s=10",
+    description:
+      "Explorez Hyrule dans une aventure épique pleine de mystères et de liberté.",
+  },
+  {
+    id: 9,
+    title: "Gran Turismo 7",
+    price: 50.0,
+    category: "Sport",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTatiQNzDvDEt-xvZxEMbN3czXBLtdhi2jc760E0-F2A2f2SN4Cxey308uvYPuXVZNbWU50dJGQRkpWtIXLQCrV2VPJ19_KFCjQoSxxCak0&s=10",
+    description:
+      "Vivez l’expérience ultime de course automobile avec des graphismes réalistes.",
+  },
+  {
+    id: 10,
+    title: "Minecraft",
+    price: 30.0,
+    category: "RPG",
+    image:
+      "https://play-lh.googleusercontent.com/DJexP6PO8dL06XvNrjG7plb7SW_SaxuNamO80ab512JA71lBEBUnaJCaZzlqWVrrlEiG=w240-h480-rw",
+    description:
+      "Construisez, explorez et survivez dans un monde infini de blocs.",
+  },
 
+
+  {
+    id: 13,
+    title: "Assassin’s Creed Mirage",
+    price: 55.0,
+    category: "Action",
+    image:
+      "https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/114FjVtNCQrW19OOaV8NZJ/615ffc9ca608f430f5fdeb5346e82a54/acm_character-block-Roshan.png",
+    description:
+      "Retour aux origines avec une aventure immersive dans Bagdad médiéval.",
+  },
+ 
 ];
 localStorage.setItem("games", JSON.stringify(games));
