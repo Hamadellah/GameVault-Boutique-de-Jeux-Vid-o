@@ -119,4 +119,4 @@ export const games = [
   },
  
 ];
-localStorage.setItem("games", JSON.stringify(games));
+localStorage.setItem("games", JSON.stringify(games));;
