@@ -72,10 +72,3 @@ filterButtons.forEach((btn) => {
 });
 
 
-searchInput.addEventListener("input", (e) => {
-  const query = e.target.value.toLowerCase();
-  const filtered = storedGames.filter((game) =>
-    game.title.toLowerCase().includes(query),
-  );
-  renderGames(filtered);
-});
