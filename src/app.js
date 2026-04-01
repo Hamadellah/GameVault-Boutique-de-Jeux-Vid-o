@@ -58,24 +58,5 @@ function renderGames(list) {
 renderGames(storedGames);
 
 
-const filterButtons = document.querySelectorAll("#filters div");
-filterButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const category = btn.textContent;
-    if (category === "All") {
-      renderGames(storedGames);
-    } else {
-      const filtered = storedGames.filter((game) => game.category === category);
-      renderGames(filtered);
-    }
-  });
-});
 
 
-searchInput.addEventListener("input", (e) => {
-  const query = e.target.value.toLowerCase();
-  const filtered = storedGames.filter((game) =>
-    game.title.toLowerCase().includes(query),
-  );
-  renderGames(filtered);
-});
