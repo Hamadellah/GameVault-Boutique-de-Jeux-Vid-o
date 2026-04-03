@@ -147,7 +147,7 @@ function showPanier() {
                 <button class="decrease bg-gray-700 text-white px-2 rounded-full" data-index="${index}">-</button>
                 <span class="text-sm font-bold">Qty: ${item.quantity}</span>
                 <button class="increase bg-gray-700 text-white px-2 rounded-full" data-index="${index}">+</button>
-                <button class="remove bg-red-500 text-white px-2 rounded-full ml-4" data-index="${index}">✖</button>
+                <button class="remove bg-red-500 text-white px-2 rounded-full ml-4" data-index="${index}">🗑️</button>
               </div>
             </div>
           </div>
