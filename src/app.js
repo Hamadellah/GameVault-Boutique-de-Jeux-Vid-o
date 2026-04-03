@@ -186,12 +186,7 @@ function showPanier() {
     });
   });
 
-  document.getElementById("checkout").addEventListener("click", () => {
-    cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showPanier();
-    updateCartCount();
-  });
+
 }
 
 showHome();
