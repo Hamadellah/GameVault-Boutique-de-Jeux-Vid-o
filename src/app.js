@@ -65,6 +65,7 @@ function showHome() {
 
   renderGames(storedGames);
 
+  // 🔹 Recherche
   document.getElementById("search").addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();
     const filtered = storedGames.filter((game) =>
@@ -185,12 +186,7 @@ function showPanier() {
     });
   });
 
-  document.getElementById("checkout").addEventListener("click", () => {
-    cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showPanier();
-    updateCartCount();
-  });
+
 }
 
 showHome();
