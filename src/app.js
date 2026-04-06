@@ -1,5 +1,6 @@
 import { games } from "./data.js";
 
+// Initialize localStorage
 if (!localStorage.getItem("games")) {
   localStorage.setItem("games", JSON.stringify(games));
 }
@@ -9,12 +10,14 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const root = document.getElementById("root");
 
+// Update cart count in header
 function updateCartCount() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
   const cartCountEl = document.getElementById("cart-count");
-  if (cartCountEl) cartCountEl.textContent = count;
+  if (cartCountEl) cartCountEl.innerText = count;
 }
 
+// Show home / products page
 function showHome() {
   root.innerHTML = `
     <div class="flex justify-center items-center gap-4 mt-6">
@@ -65,7 +68,7 @@ function showHome() {
 
   renderGames(storedGames);
 
-  // 🔹 Recherche
+  // Search
   document.getElementById("search").addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();
     const filtered = storedGames.filter((game) =>
@@ -74,7 +77,7 @@ function showHome() {
     renderGames(filtered);
   });
 
-  
+  // Filters
   document.querySelectorAll("#filters div").forEach((btn) => {
     btn.addEventListener("click", () => {
       const category = btn.textContent;
@@ -92,6 +95,7 @@ function showHome() {
   document.getElementById("go-to-cart").addEventListener("click", showPanier);
 }
 
+// Add item to cart
 function addToCart(game) {
   const existing = cart.find((item) => item.id === game.id);
   if (existing) {
@@ -103,23 +107,26 @@ function addToCart(game) {
   updateCartCount();
 }
 
-function updateQuantity(index, change) {
-  if (cart[index]) {
-    cart[index].quantity += change;
-    if (cart[index].quantity <= 0) {
-      cart.splice(index, 1);
+function updateQuantity(id) {
+  const item = cart.find((item) => item.id == id);
+  if (item) {
+    item.quantity += 1;
+    if (item.quantity <= 0) {
+      cart = cart.filter((i) => i.id != id);
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     showPanier();
   }
 }
 
-function removeItem(index) {
-  cart.splice(index, 1);
+// Remove item by id
+function removeItem(id) {
+  cart = cart.filter((item) => item.id != id);
   localStorage.setItem("cart", JSON.stringify(cart));
   showPanier();
 }
 
+// Show cart page
 function showPanier() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -137,17 +144,17 @@ function showPanier() {
         ${cart.length === 0 ? '<p class="text-center text-gray-500">Votre panier est vide</p>' : ""}
         ${cart
           .map(
-            (item, index) => `
+            (item) => `
           <div class="bg-black rounded-3xl p-4 flex items-center gap-4 border border-gray-900 shadow-2xl">
             <img src="${item.image}" class="w-20 h-20 rounded-lg object-cover">
             <div class="flex-1">
               <h2 class="text-sm font-bold">${item.title}</h2>
               <p class="text-sm font-bold text-gray-400">$${(item.price * item.quantity).toFixed(2)}</p>
               <div class="flex items-center gap-2 mt-2">
-                <button class="decrease bg-gray-700 text-white px-2 rounded-full" data-index="${index}">-</button>
+                <button class="decrease bg-gray-700 text-white px-2 rounded-full" data-id="${item.id}">-</button>
                 <span class="text-sm font-bold">Qty: ${item.quantity}</span>
-                <button class="increase bg-gray-700 text-white px-2 rounded-full" data-index="${index}">+</button>
-                <button class="remove bg-red-500 text-white px-2 rounded-full ml-4" data-index="${index}">🗑️</button>
+                <button class="increase bg-gray-700 text-white px-2 rounded-full" data-id="${item.id}">+</button>
+                <button class="remove bg-red-500 text-white px-2 rounded-full ml-4" data-id="${item.id}">🗑️</button>
               </div>
             </div>
           </div>
@@ -158,7 +165,7 @@ function showPanier() {
 
       <div class="max-w-md mx-auto mt-12 bg-black rounded-full p-2 flex justify-between items-center px-6 border border-gray-800 shadow-xl">
         <span class="text-lg font-semibold tracking-wide">total : ${total.toFixed(2)}$</span>
-        <button id="checkout" class="bg-[#f0a500] text-black font-bold py-2 px-8 rounded-full">checkout</button>
+        <button id="checkout" class="bg-[#f0a500] text-black font-bold py-2 px-8 rounded-full">commender</button>
       </div>
     </div>
   `;
@@ -167,28 +174,30 @@ function showPanier() {
 
   document.querySelectorAll(".increase").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const index = e.target.dataset.index;
-      updateQuantity(index, 1);
+      const id = e.target.dataset.id;
+      updateQuantity(id, 1);
     });
   });
 
   document.querySelectorAll(".decrease").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const index = e.target.dataset.index;
-      updateQuantity(index, -1);
+      const id = e.target.dataset.id;
+      updateQuantity(id, -1);
     });
   });
 
   document.querySelectorAll(".remove").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const index = e.target.dataset.index;
-      removeItem(index);
+      const id = e.target.dataset.id;
+      removeItem(id);
     });
   });
 
   document.getElementById("checkout").addEventListener("click", () => {
+
     cart = [];
     localStorage.setItem("cart", JSON.stringify(cart));
+    alert("votre commende est comfirmé")
     showPanier();
     updateCartCount();
   });
