@@ -105,9 +105,6 @@ function upd(id) {
   const item = cart.find((item) => item.id == id);
   if (item) {
     item.quantity += 1;
-    if (item.quantity <= 0) {
-      cart = cart.filter((i) => i.id != id);
-    }
     localStorage.setItem("cart", JSON.stringify(cart));
     showPanier();
   }
@@ -120,13 +117,14 @@ function removeItem(id) {
 }
 
 function showPanier() {
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity,0);
+  
 
   root.innerHTML = `
     <div class="min-h-screen bg-[#1a1a1a] text-white p-4 font-sans">
       <header class="flex justify-between items-center mb-8 px-2">
         <button id="back-home" class="text-gray-400 flex items-center gap-2">
-           ← Back
+            Back
         </button>
         <h1 class="text-center text-xl font-bold uppercase tracking-widest">Your Panier</h1>
         <div class="w-8"></div>
