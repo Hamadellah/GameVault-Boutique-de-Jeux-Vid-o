@@ -1,30 +1,24 @@
 import { games } from "./data.js";
 
-// Initialize localStorage
 if (!localStorage.getItem("games")) {
   localStorage.setItem("games", JSON.stringify(games));
 }
+
+
 
 let storedGames = JSON.parse(localStorage.getItem("games"));
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const root = document.getElementById("root");
 
-// Update cart count in header
-function updateCartCount() {
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const cartCountEl = document.getElementById("cart-count");
-  if (cartCountEl) cartCountEl.innerText = count;
-}
-
-// Show home / products page
 function showHome() {
   root.innerHTML = `
     <div class="flex justify-center items-center gap-4 mt-6">
       <h1 class="text-white text-3xl font-serif">🎮 PRODUCT</h1>
       <button id="go-to-cart" class="relative p-2 bg-gray-800 rounded-full text-white">
-        🛒 <span id="cart-count" class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">${cart.reduce((s, i) => s + i.quantity, 0)}</span>
+        🛒
       </button>
+      <div class="text-white"></div>
     </div>
     
     <div class="flex justify-center">
@@ -61,14 +55,13 @@ function showHome() {
       `;
       card
         .querySelector(".add-btn")
-        .addEventListener("click", () => addToCart(game));
+        .addEventListener("click", () =>  addca(game));
       container.appendChild(card);
     });
   }
 
   renderGames(storedGames);
 
-  // Search
   document.getElementById("search").addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();
     const filtered = storedGames.filter((game) =>
@@ -77,16 +70,19 @@ function showHome() {
     renderGames(filtered);
   });
 
-  // Filters
   document.querySelectorAll("#filters div").forEach((btn) => {
     btn.addEventListener("click", () => {
       const category = btn.textContent;
+      renderGames(storedGames);
+
       if (category === "All") {
-        renderGames(storedGames);
+
       } else {
         const filtered = storedGames.filter(
           (game) => game.category === category,
         );
+        console.log(games.length.category);
+        
         renderGames(filtered);
       }
     });
@@ -95,8 +91,7 @@ function showHome() {
   document.getElementById("go-to-cart").addEventListener("click", showPanier);
 }
 
-// Add item to cart
-function addToCart(game) {
+function addca(game) {
   const existing = cart.find((item) => item.id === game.id);
   if (existing) {
     existing.quantity += 1;
@@ -104,10 +99,9 @@ function addToCart(game) {
     cart.push({ ...game, quantity: 1 });
   }
   localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
 }
 
-function updateQuantity(id) {
+function upd(id) {
   const item = cart.find((item) => item.id == id);
   if (item) {
     item.quantity += 1;
@@ -119,14 +113,12 @@ function updateQuantity(id) {
   }
 }
 
-// Remove item by id
 function removeItem(id) {
   cart = cart.filter((item) => item.id != id);
   localStorage.setItem("cart", JSON.stringify(cart));
   showPanier();
 }
 
-// Show cart page
 function showPanier() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -151,10 +143,10 @@ function showPanier() {
               <h2 class="text-sm font-bold">${item.title}</h2>
               <p class="text-sm font-bold text-gray-400">$${(item.price * item.quantity).toFixed(2)}</p>
               <div class="flex items-center gap-2 mt-2">
-                <button class="decrease bg-gray-700 text-white px-2 rounded-full" data-id="${item.id}">-</button>
+                <button class="moins bg-gray-700 text-white px-2 rounded-full" data-id="${item.id}">-</button>
                 <span class="text-sm font-bold">Qty: ${item.quantity}</span>
-                <button class="increase bg-gray-700 text-white px-2 rounded-full" data-id="${item.id}">+</button>
-                <button class="remove bg-red-500 text-white px-2 rounded-full ml-4" data-id="${item.id}">🗑️</button>
+                <button class="plus bg-gray-700 text-white px-2 rounded-full" data-id="${item.id}">+</button>
+                <button class="del bg-red-500 text-white px-2 rounded-full ml-4" data-id="${item.id}">🗑️</button>
               </div>
             </div>
           </div>
@@ -165,41 +157,39 @@ function showPanier() {
 
       <div class="max-w-md mx-auto mt-12 bg-black rounded-full p-2 flex justify-between items-center px-6 border border-gray-800 shadow-xl">
         <span class="text-lg font-semibold tracking-wide">total : ${total.toFixed(2)}$</span>
-        <button id="checkout" class="bg-[#f0a500] text-black font-bold py-2 px-8 rounded-full">commender</button>
+        <button id="cmd" class="bg-[#f0a500] text-black font-bold py-2 px-8 rounded-full">commender</button>
       </div>
     </div>
   `;
 
   document.getElementById("back-home").addEventListener("click", showHome);
 
-  document.querySelectorAll(".increase").forEach((btn) => {
+  document.querySelectorAll(".plus").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const id = e.target.dataset.id;
-      updateQuantity(id, 1);
+      upd(id, 1);
     });
   });
 
-  document.querySelectorAll(".decrease").forEach((btn) => {
+  document.querySelectorAll(".moins").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const id = e.target.dataset.id;
-      updateQuantity(id, -1);
+      upd(id, -1);
     });
   });
 
-  document.querySelectorAll(".remove").forEach((btn) => {
+  document.querySelectorAll(".del").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const id = e.target.dataset.id;
       removeItem(id);
     });
   });
 
-  document.getElementById("checkout").addEventListener("click", () => {
-
+  document.getElementById("cmd").addEventListener("click", () => {
     cart = [];
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("votre commende est comfirmé")
+    alert("votre commonde est comfirmé");
     showPanier();
-    updateCartCount();
   });
 }
 

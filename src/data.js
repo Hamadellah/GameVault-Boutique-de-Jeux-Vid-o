@@ -108,7 +108,7 @@ export const games = [
 
 
   {
-    id: 13,
+    id: 11,
     title: "Assassin’s Creed Mirage",
     price: 55.0,
     category: "Action",
