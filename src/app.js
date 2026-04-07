@@ -21,6 +21,7 @@ function showHome() {
     
     <div class="flex justify-center">
       <input id="search" class="rounded-full mt-[20px] w-[90%] h-12 px-5 bg-gray-800 text-white placeholder-gray-400 focus:ring-4 focus:ring-yellow-400 focus:outline-none shadow-lg transition-all" type="search" placeholder="Search your favorite game...">
+      <input id="serchprix" class"" type="search" placeholder="search whith prix">
     </div>
 
     <h1 class="text-white mt-[7%] text-2xl font-serif ml-[4%]">Filter</h1>
@@ -96,10 +97,12 @@ function addca(game) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function upd(id) {
+function upd(id,change) {
   const item = cart.find((item) => item.id == id);
   if (item) {
-    item.quantity += 1;
+    item.quantity += change;
+
+  
     localStorage.setItem("cart", JSON.stringify(cart));
     showPanier();
   }
@@ -110,6 +113,19 @@ function removeItem(id) {
   localStorage.setItem("cart", JSON.stringify(cart));
   showPanier();
 }
+function sum() {
+  const tab = [1, 2, 3, 4]
+  const som = tab.reduce()
+  console.log(som)
+}
+
+const searchprix = document.getElementById("serchprix");
+searchprix.addEventListener("input", (e) => {
+  let prix = e.target.value
+  let filterprix = filter
+  
+})
+
 
 function showPanier() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
