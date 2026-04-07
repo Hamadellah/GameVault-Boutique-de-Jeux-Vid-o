@@ -4,8 +4,6 @@ if (!localStorage.getItem("games")) {
   localStorage.setItem("games", JSON.stringify(games));
 }
 
-
-
 let storedGames = JSON.parse(localStorage.getItem("games"));
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -34,7 +32,6 @@ function showHome() {
     </div>
     <div id="products" class="grid grid-cols-1 gap-6 p-6 md:grid-cols-4"></div>
   `;
-
   const container = document.getElementById("products");
 
   function renderGames(list) {
@@ -55,7 +52,7 @@ function showHome() {
       `;
       card
         .querySelector(".add-btn")
-        .addEventListener("click", () =>  addca(game));
+        .addEventListener("click", () => addca(game));
       container.appendChild(card);
     });
   }
@@ -76,13 +73,11 @@ function showHome() {
       renderGames(storedGames);
 
       if (category === "All") {
-
       } else {
         const filtered = storedGames.filter(
           (game) => game.category === category,
         );
-        console.log(games.length.category);
-        
+
         renderGames(filtered);
       }
     });
@@ -117,8 +112,7 @@ function removeItem(id) {
 }
 
 function showPanier() {
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity,0);
-  
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   root.innerHTML = `
     <div class="min-h-screen bg-[#1a1a1a] text-white p-4 font-sans">
